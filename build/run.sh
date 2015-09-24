@@ -35,6 +35,7 @@ chmod +x /etc/service/thumbor/run
 apt-get update -y
 apt-get install -y --no-install-recommends \
     build-essential \
+    git \
     python python-dev python-pip \
     webp libwebp-dev \
     gifsicle libgif-dev \
@@ -54,7 +55,7 @@ tar -jxvf /tmp/jpeg-archive.tar.bz2 -C /usr/bin --wildcards 'jpeg-*'
 pip install \
     remotecv graphicsmagick-engine opencv-engine j2cli \
     Pillow==2.9.0 \
-    tc_aws \
+    git+https://github.com/pgr0ss/aws.git@fix_key \
     thumbor==$THUMBOR_VERSION
 
 pip install https://github.com/zanui/thumbor-plugins/archive/jpegrecompress_add_options.zip
