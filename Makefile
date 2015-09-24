@@ -1,6 +1,6 @@
 .PHONY: all release build shell test version tag repo
 
-REPO = zanui/thumbor
+REPO = pgr0ss/thumbor
 VERSION = `grep THUMBOR_VERSION Dockerfile | cut -d' ' -f3`
 DOCKER = `which docker`
 TAG = $(VERSION).$(shell git tag -l | grep $(VERSION) | wc -l | xargs echo)
@@ -9,8 +9,6 @@ all: build release
 
 release:
 	@echo Pushing $(REPO):$(TAG)...
-	@if [ -z "${CIRCLECI}" ]; then echo "This is not CircleCI"; exit 1; fi
-	@github-release release -u zanui -r docker-thumbor -t v$(TAG) -n $(TAG)
 	@echo Tagging $(REPO):$(TAG) with $(REPO):latest
 	@$(DOCKER) tag -f $(REPO):$(TAG) $(REPO):latest
 	@echo Tagging $(REPO):$(TAG) with $(REPO):$(VERSION)
